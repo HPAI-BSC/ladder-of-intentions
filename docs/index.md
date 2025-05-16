@@ -26,7 +26,7 @@ feature_text: |
 > Within the field of Autonomous Agents, the predominant paradigm is that agents perceive, reflect, reason, and act on an environment, employing some specific decision mechanism to pick actions. 
 Nonetheless, the process that originates the decisions may differ depending on the agent, as this paradigm is agnostic about its concrete action selection inference.
 However, the need for being able to explain these decisions is constantly increasing, and the heterogeneity of the internal processes of agents has ended up in different ad hoc techniques for each architecture, for providing explanations with disparate validation mechanisms, hindering efforts at comparing mechanisms.
-
+>
 > To tackle this, in this contribution, we propose a unifying architecture framework based on causality, beliefs, and intentions. This framework allows for the examination of heterogeneous agents (from BDI and RL to LLM-based agents) without modification. 
 This approach clearly decouples declarative and procedural knowledge, as well as designer-given versus learnt representations. 
 It categorises what kind of questions can be answered by each agent reasoning component and allows a more seamless workflow for transferring knowledge between diverse agent architectures.
