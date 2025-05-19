@@ -93,13 +93,13 @@ The value of doing action [go_up] when percept[(at 3 24)] is 0.7
 
 This is the rule we use to split the causal trace of action-taking homogeneously between architectures: percepts belong
 in the first rung of the ladder, and any statement reifying or including a statement of level _i_ belongs at least to
-level _i+1_. Each of these levels are named S_i. We associate each level with the imperative code that uses it: Ii(Si).
+level _i+1_. Each of these levels are named S<sub>i</sub>. We associate each level with the imperative code that uses it: I<sub>i</sub>(S<sub>i</sub>).
 The final imperative code is action execution. Each imperative code is 'generated' or at least 'modified' by other
 imperative codes, for example: 
 
-> [actions] I0 =  [policy]I1([percepts]S1)
-> 
-> [policy]I1   = I2(S2)
+[actions] I<sub>0</sub> =  [policy]I<sub>1</sub>([percepts]S<sub>1</sub>)
+ 
+[policy] I<sub>1</sub>   = I<sub>2</sub>(S<sub>2</sub>)
 
 ## The Ladder
 
@@ -141,8 +141,8 @@ We note that statements in each level are generally homogeneous across architect
 about perceptions and alternative environment feedback (be it rewards, error messages, action spaces...). The second
 level speaks of action consequence: in terms of value, changes in the world, how reachable a state may be, or even in 
 terms of how a code should change to fix an error (related to a percept in the environment) in the case of Voyager.
-Higher levels are less common, but are often related to 'strategies' to achieve or balance goals to fulfill an endgoal:
-exploration as a means to improve exploitation, and how much the trade-off should go to achieve it; priorisation between
+Higher levels are less common, but are often related to 'strategies' to achieve or balance goals to fulfill an end goal:
+exploration as a means to improve exploitation, and how much the trade-off should go to achieve it; prioritisation between
 goals given a context, etc.
 
 Key among these observations is how the environment changes when learning happens.
@@ -194,13 +194,13 @@ task.
 
 As such, we conclude that there are three types of explainability questions per level, each replying in a vocabulary of
 other elements of the model:
-*  What was the intent behind I_i? $$I_{i+1}$$ is its desire. This question can be trivial if there is just one clear
+*  What was the intent behind I<sub>i</sub>? I<sub>i+1</sub> is its desire. This question can be trivial if there is just one clear
 intention, but if it is a composite it can be tricky to find which particular sub-desire is the responsible behind the
 intent.
-* What were the beliefs that made you think I_i helped you achieve $$I_{i+1}$$? The answer should be a subset of relevant
-statements from $$S_{i+1}$$.
-* What were the reasons why you believed in a statement $$s\in S_{i}? The answer should refer to a set or sequence of
-$$S_{i-1}$$ and $$I_{i-1}$$, potentially with some further references to the mechanism of E.
+* What were the beliefs that made you think I<sub>i</sub> helped you achieve I<sub>i+1</sub>? The answer should be a subset of relevant
+statements from S<sub>i+1</sub>.
+* What were the reasons why you believed in a statement s in S<sub>i</sub>? The answer should refer to a set or sequence of
+S<sub>i-1</sub> and I<sub>i-1</sub>, potentially with some further references to the mechanism of E.
 
 ## Applying the Ladder and new XAI techniques
 
