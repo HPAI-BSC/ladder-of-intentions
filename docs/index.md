@@ -107,19 +107,29 @@ state.
         <div class="screenshot">
             <img class="screenshot" src="assets/ladder1.png">
         </div>
+    </div>
+    <div class="col-2">
         <p class="results-text">
             The separation between statements and imperative code is no coincidence: there are many benefits for
             separating declarative and procedural knowledge, key among those transferability.
 
             Moreso, from an XAI perspective, one can consider the branches of causality similar to that of intention:
-            if intention is a desire to do something together with the belief that it is achievable, here S takes the role of belief, and intentions take the role of 'desires' of a higher order of abstraction.
+            if intention is a desire to do something together with the belief that it is achievable, here S takes the 
+            role of belief, and intentions take the role of 'desires' of a higher order of abstraction.
         </p>
-    </div>
-    <div class="col-2">
     </div>
 </div>
 
+
+Following this logic, we can take a variety of architectures and cast them into the framework, from Q-learning and
+REINFORCE (traditional RL techniques), purely symbolic BDI agents, LLM-based Voyager, or even approximations from zero-shot
+RL like Touati's Forward-Backward representation (from his paper 'Does Zero-Shot RL exist?').
+
 <img class="screenshot" src="assets/table.png">
+
+In the table, we list each of the levels with statements (in blue) and the algorithm or intention (in red). Note how
+each algorithm determines the algorithm of the next level, such as priming a means-ends reasoner or planner with a goal,
+modifying the policy weights, or coding the program that will run the agent in the environment.
 
 ### Learning in the Ladder
 
