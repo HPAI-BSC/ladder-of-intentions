@@ -1,6 +1,6 @@
 ---
 title: ""
-feature_image: "https://picsum.photos/1300/400?image=989"
+feature_image: "https://picsum.photos/id/276/1920/600/?blur=5"
 feature_text: |
   ## Ladder of Intentions: unifying agent architectures for explainability and transferability
   Victor Gimenez-Abalos<sup>*,1</sup>, Adrian Tormos<sup>1</sup>, Filip Edström<sup>2</sup>, Sergio Alvarez-Napagao<sup>3,1</sup>, Javier Vázquez-Salceda<sup>3</sup>, Mattias Brännström<sup>2</sup>, John Lindqvist<sup>4</sup>
@@ -23,13 +23,12 @@ feature_text: |
 
 # Abstract
 
-> Within the field of Autonomous Agents, the predominant paradigm is that agents perceive, reflect, reason, and act on an environment, employing some specific decision mechanism to pick actions. 
-Nonetheless, the process that originates the decisions may differ depending on the agent, as this paradigm is agnostic about its concrete action selection inference.
-However, the need for being able to explain these decisions is constantly increasing, and the heterogeneity of the internal processes of agents has ended up in different ad hoc techniques for each architecture, for providing explanations with disparate validation mechanisms, hindering efforts at comparing mechanisms.
->
-> To tackle this, in this contribution, we propose a unifying architecture framework based on causality, beliefs, and intentions. This framework allows for the examination of heterogeneous agents (from BDI and RL to LLM-based agents) without modification. 
-This approach clearly decouples declarative and procedural knowledge, as well as designer-given versus learnt representations. 
-It categorises what kind of questions can be answered by each agent reasoning component and allows a more seamless workflow for transferring knowledge between diverse agent architectures.
+> Within the field of Autonomous Agents, the predominant paradigm is that agents perceive, reflect, reason, and act on an environment, employing some specific decision mechanism to pick actions.
+> Nonetheless, the process that originates the decisions may differ depending on the agent, as this paradigm is agnostic about its concrete action selection inference.
+> However, the need for being able to explain these decisions is constantly increasing, and the heterogeneity of the internal processes of agents has ended up in different ad hoc techniques for each architecture, for providing explanations with disparate validation mechanisms, hindering efforts at comparing mechanisms.
+> To tackle this, in this contribution, we propose a unifying architecture framework based on causality, beliefs, and intentions. This framework allows for the examination of heterogeneous agents (from BDI and RL to LLM-based agents) without modification.
+> This approach clearly decouples declarative and procedural knowledge, as well as designer-given versus learnt representations.
+> It categorises what kind of questions can be answered by each agent reasoning component and allows a more seamless workflow for transferring knowledge between diverse agent architectures.
 
 # Core intuition
 
@@ -59,7 +58,7 @@ in-depth examples of particular scenarios.
 
 ### Reification as the underpinning idea
 
-Think of an agent that receives some percepts _p1...pk_ about the world. These percepts are _eventually_ used to decide
+Think of an agent that receives some percepts _p<sub>1</sub>...p<sub>k</sub>_ about the world. These percepts are _eventually_ used to decide
 which action to take. The action depends causally on the percepts (except in blind agents or edge-cases), but what about
 the other side?
 
@@ -67,7 +66,7 @@ If a designer provides a perfectly imperative code that uses the percepts to det
 then the cause of the action are the percepts _and_ this imperative code, and if we were to search for a cause for the
 imperative code, it would be: someone programmed it that way.
 
-If actions are taken according to a more declarative program (e.g., a planner), we could consider that actions are
+If actions are taken according to a more declarative program (e.g. a planner), we could consider that actions are
 determined by the percepts _and_ a plan; and in turn the plan was created by a planner _and_ some domain information: 
 consequences of actions, etc.
 
@@ -97,13 +96,15 @@ level _i+1_. Each of these levels are named S<sub>i</sub>. We associate each lev
 The final imperative code is action execution. Each imperative code is 'generated' or at least 'modified' by other
 imperative codes, for example: 
 
-[actions] I<sub>0</sub> =  [policy]I<sub>1</sub>([percepts]S<sub>1</sub>)
- 
-[policy] I<sub>1</sub>   = I<sub>2</sub>(S<sub>2</sub>)
+```
+[actions] I0 = [policy]I1 ( [percepts]S1 )
+
+[policy]  I1 = I2(S2)
+```
 
 ## The Ladder
 
-The Ladder architecture consists thus on a cascade of imperative code, starting from a fixed, designer-given code (IN)
+The Ladder architecture consists thus on a cascade of imperative code, starting from a fixed, designer-given code (I<sub>N</sub>)
 and that culminates on action. Furthermore, this cascade is regulated or mediated by some statements. Eventually,
 the statements (that are provided by the world or environment) determine the action, which affects the world in the next
 state.
@@ -156,7 +157,7 @@ When does intention change? Much like actions (considered the lowest level inten
 the intention and the statements of the next level (its desire and beliefs, respectively). Given the recursivity of 
 changes in intention, we can say intentions change when beliefs change.
 
-A belief can change as a result of a direct change of percepts (a change in S1 effecting a change in higher levels) or,
+A belief can change as a result of a direct change of percepts (a change in S<sub>1</sub> effecting a change in higher levels) or,
 most interestingly, when we are _learning_. We say more interestingly given that, in models where this is not the case,
 the separation in levels may result not only arbitrary, but useless: why stratify things of upper levels if they all
 determine something fixed across the entire lifespan of the agent? If a policy is constant, it makes little sense to
@@ -168,7 +169,7 @@ _experiencing_ a number of statements and intentions of such level. In retrospec
 consequences of actions requires to see sequences of states and actions.
 
 In this model, we introduce this form of causality in an informal way: the set of variables S and I of the inferior
-rung of the ladder are 'compiled' into a statement of the current level by an algorithm (which we named E from Epistemic).
+rung of the ladder are 'compiled' into a statement of the current level by an algorithm (which we named _E_ from Epistemic).
 This implies that _E_ is whatever algorithms were used to create the Q-function from rewards, process and write the 
 feedback for Voyager, etc. Similarly, it would be the curriculum or 'updater' of the epsilon parameter in Q-learning.
 All of these are statements that 'make sense' to be updated from inferior levels (Q-learning being updated with reward
@@ -207,10 +208,10 @@ S<sub>i-1</sub> and I<sub>i-1</sub>, potentially with some further references to
 As part of the philosophy of the ladder, check out how we leverage the ideas behind intention into explainability.
 [Intention-aware Policy Graphs](https://hpai-bsc.github.io/intention-aware-pgs/) is another work published at AAMAS'25 
 (main track) in which we attempt to tackle the three questions of the second level for **any** agent architecture in a
-seamless way: using external observation (to build a simulacrum of the agent's S2 and I1), and hypotheses of what I2 
+seamless way: using external observation (to build a simulacrum of the agent's S<sub>2</sub> and I<sub>1</sub>), and hypotheses of what I<sub>2</sub>
 could be (see, hypotheses of what an explainee can understand as 'goals' of the agent), we answer the intent of a policy
-I1 by understanding which intentions hold at a particular time, answering why actions are taken in terms of how they
-increase the probability of bringing about goals (I2, or desires), and are capable of referencing particular S2 beliefs
+I<sub>1</sub> by understanding which intentions hold at a particular time, answering why actions are taken in terms of how they
+increase the probability of bringing about goals (I<sub>2</sub>, or desires), and are capable of referencing particular S<sub>2</sub> beliefs
 (in the form of P(s',a|s)) and point out the reason for those beliefs (since it is a frequentist model, individual
 data points can be referenced).
 
@@ -221,9 +222,8 @@ human drivers, in [Explaining Autonomous Vehicles with IPGs](https://hpai-bsc.gi
 
 ```
 @inproceedings{gimenez_ladder_2025,
-author = {Gimenez-Abalos, Victor and Tormos, Adrian and Edström, Filip and Alvarez-Napagao, Sergio and Vázquez-Salceda, Javier and Brännström, Mattias and Lindqvist, John},
-title = {Ladder of Intentions: unifying agent architectures for explainability and transferability},
-year = {2025},
-TODO: EXTRAAMAS block
+    author = {Gimenez-Abalos, Victor and Tormos, Adrian and Edström, Filip and Alvarez-Napagao, Sergio and Vázquez-Salceda, Javier and Brännström, Mattias and Lindqvist, John},
+    title = {Ladder of {Intentions}: unifying agent architectures for explainability and transferability},
+    year = {2025}
 }
 ```

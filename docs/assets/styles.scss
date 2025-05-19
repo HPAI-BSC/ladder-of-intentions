@@ -89,8 +89,8 @@ $bodytype: (
   display: flex;
  }
 div.col-1 {
-  width: 50%;
-  max-width: 50%;
+  width: 30%;
+  max-width: 30%;
 }
 .col-2 {
   flex: 1;
@@ -105,7 +105,7 @@ div.screenshot {
 
 p.results-text {
   padding-left: 10px;
-  font-size: 12pt;
+  font-size: 13pt;
 }
 
 span.results-text.indented {
