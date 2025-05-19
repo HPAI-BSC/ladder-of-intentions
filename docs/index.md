@@ -202,11 +202,22 @@ statements from $$S_{i+1}$$.
 * What were the reasons why you believed in a statement $$s\in S_{i}? The answer should refer to a set or sequence of
 $$S_{i-1}$$ and $$I_{i-1}$$, potentially with some further references to the mechanism of E.
 
-[//]: # (## Current status)
+## Applying the Ladder and new XAI techniques
 
-[//]: # (IPG)
+As part of the philosophy of the ladder, check out how we leverage the ideas behind intention into explainability.
+[Intention-aware Policy Graphs](https://hpai-bsc.github.io/intention-aware-pgs/) is another work published at AAMAS'25 
+(main track) in which we attempt to tackle the three questions of the second level for **any** agent architecture in a
+seamless way: using external observation (to build a simulacrum of the agent's S2 and I1), and hypotheses of what I2 
+could be (see, hypotheses of what an explainee can understand as 'goals' of the agent), we answer the intent of a policy
+I1 by understanding which intentions hold at a particular time, answering why actions are taken in terms of how they
+increase the probability of bringing about goals (I2, or desires), and are capable of referencing particular S2 beliefs
+(in the form of P(s',a|s)) and point out the reason for those beliefs (since it is a frequentist model, individual
+data points can be referenced).
 
-# Cite as
+And when we mean **any agent**, we mean it. This work has also been applied to biological, non-artificial agents:
+human drivers, in [Explaining Autonomous Vehicles with IPGs](https://hpai-bsc.github.io/ipg4av/) (EXTRAAMAS'25).
+
+# Cite as:
 
 ```
 @inproceedings{gimenez_ladder_2025,
