@@ -42,6 +42,7 @@ even natural selection; agent's actions are causally determined not just by the 
 that brought it up, etc. A plethora of Explainable AI (_XAI_) methods already tackle this, each working to solve the causes behind
 the mechanism of action-taking, generally for an architecture or a family of them.
 
+
 ## But, can't we have a more general XAI understanding of the causes behind the causes?
 This idea of finding a general causal trace behind action-taking is not new either. This would enable _centralising_ the
 problem of _XAI_: which kind of questions can be asked to an agent would become independent of the architecture,
@@ -50,6 +51,11 @@ user-studies would be exportable to new methods, and for a new architecture
 There are taxonomies that seek to bridge the gap between existing architectures. However, when new architectures pop up,
 how do we cast them together? Is it all work that needs to be re-done? How do we ensure that the standardised _XAI_ 
 questions reply in the same terms, and are comparable with the new architecture's substrate?
+
+In this webpage, the focus is to illustrate the logic and potential of this meta-architecture: the ladder of intentions.
+In an effort to make it more understandable, there is less focus on rigour and more on the intuitions and underpinning
+factors that could not make it into the paper itself, and refer to the paper for formal explanations as well as more
+in-depth examples of particular scenarios.
 
 ### Reification as the underpinning idea
 
@@ -131,10 +137,74 @@ In the table, we list each of the levels with statements (in blue) and the algor
 each algorithm determines the algorithm of the next level, such as priming a means-ends reasoner or planner with a goal,
 modifying the policy weights, or coding the program that will run the agent in the environment.
 
+We note that statements in each level are generally homogeneous across architectures by design. The first level is
+about perceptions and alternative environment feedback (be it rewards, error messages, action spaces...). The second
+level speaks of action consequence: in terms of value, changes in the world, how reachable a state may be, or even in 
+terms of how a code should change to fix an error (related to a percept in the environment) in the case of Voyager.
+Higher levels are less common, but are often related to 'strategies' to achieve or balance goals to fulfill an endgoal:
+exploration as a means to improve exploitation, and how much the trade-off should go to achieve it; priorisation between
+goals given a context, etc.
+
+Key among these observations is how the environment changes when learning happens.
+
 ### Learning in the Ladder
 
+Statements and intentions are generally non-static. The previous image displays the ladder as a fixed causal graph, in
+a single time-step and involving a single action.
+
+When does intention change? Much like actions (considered the lowest level intention), each intention is conditioned by
+the intention and the statements of the next level (its desire and beliefs, respectively). Given the recursivity of 
+changes in intention, we can say intentions change when beliefs change.
+
+A belief can change as a result of a direct change of percepts (a change in S1 effecting a change in higher levels) or,
+most interestingly, when we are _learning_. We say more interestingly given that, in models where this is not the case,
+the separation in levels may result not only arbitrary, but useless: why stratify things of upper levels if they all
+determine something fixed across the entire lifespan of the agent? If a policy is constant, it makes little sense to
+distinguish those levels.
+
+In the model of the ladder, it seems apparent that learning or altering a 
+statement of a particular level ---which contains statements and intentions of a lower level--- should be a result of 
+_experiencing_ a number of statements and intentions of such level. In retrospect, it is obvious: learning the 
+consequences of actions requires to see sequences of states and actions.
+
+In this model, we introduce this form of causality in an informal way: the set of variables S and I of the inferior
+rung of the ladder are 'compiled' into a statement of the current level by an algorithm (which we named E from Epistemic).
+This implies that _E_ is whatever algorithms were used to create the Q-function from rewards, process and write the 
+feedback for Voyager, etc. Similarly, it would be the curriculum or 'updater' of the epsilon parameter in Q-learning.
+All of these are statements that 'make sense' to be updated from inferior levels (Q-learning being updated with reward
+and experience from state-action trajectories, feedback being compiled by locating the unexpectedness of states and the
+error logs, or decaying epsilon given that the Q-function appears to be converging to a useful exploiter).
+
 <img class="screenshot" src="assets/ladder2.png">
+
+As such, rather than giving a cross-section of the model, it makes sense to see it working through time: statements and
+intentions can hold at a certain moment, but they can also cease or start. When analysing action explainability, the
+causal chain needs to consider all intentions that hold at the moment of taking an action, as well as all statements.
+
+This is a particularly beneficial property of the architecture, reducing the workload of producing a single explanation:
+while intentions and statements may be long-lived, it is possible to trace when did they start, and which were the causes
+of their existence.
+
 <img class="screenshot" src="assets/ladder3.png">
+
+However, while it is important to understand the source of intentions, and desires; it
+is also important to explain the source of beliefs. Understanding of 'why the agent believes the things it does' and
+what are the sources or mechanisms for beliefs and how an epistemic engine compiles them is an important explainability
+task.
+
+As such, we conclude that there are three types of explainability questions per level, each replying in a vocabulary of
+other elements of the model:
+*  What was the intent behind I_i? $$I_{i+1}$$ is its desire. This question can be trivial if there is just one clear
+intention, but if it is a composite it can be tricky to find which particular sub-desire is the responsible behind the
+intent.
+* What were the beliefs that made you think I_i helped you achieve $$I_{i+1}$$? The answer should be a subset of relevant
+statements from $$S_{i+1}$$.
+* What were the reasons why you believed in a statement $$s\in S_{i}? The answer should refer to a set or sequence of
+$$S_{i-1}$$ and $$I_{i-1}$$, potentially with some further references to the mechanism of E.
+
+[//]: # (## Current status)
+
+[//]: # (IPG)
 
 # Cite as
 
