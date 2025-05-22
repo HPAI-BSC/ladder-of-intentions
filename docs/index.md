@@ -96,11 +96,10 @@ level _i+1_. Each of these levels are named S<sub>i</sub>. We associate each lev
 The final imperative code is action execution. Each imperative code is 'generated' or at least 'modified' by other
 imperative codes, for example: 
 
-```
-[actions] I0 = [policy]I1 ( [percepts]S1 )
 
-[policy]  I1 = I2(S2)
-```
+[actions] I<sub>0</sub> =  [policy] I<sub>1</sub>([percepts]S<sub>1</sub>)
+ 
+[policy] I<sub>1</sub>   = I<sub>2</sub>(S<sub>2</sub>)
 
 ## The Ladder
 
