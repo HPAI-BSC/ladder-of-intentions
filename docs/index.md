@@ -19,7 +19,7 @@ feature_text: |
 ---
 
 
-{% include button.html text="Paper" link="" color="#4f2121"  %} {% include button.html text="BlueSky" link="https://bsky.app/profile/hpai.bsky.social" color="rgb(32, 139, 254)" %}  {% include button.html text="Linkedin" link="https://www.linkedin.com/company/hpai" color="#0a66c2" %}
+{% include button.html text="Paper" link="" color="#4f2121"  %} {% include button.html text="Oral Presentation Slides" link="https://github.com/HPAI-BSC/intention-aware-pgs/blob/main/Slides-presented-at-AAMAS25.pdf" color="#4f2121"  %} {% include button.html text="BlueSky" link="https://bsky.app/profile/hpai.bsky.social" color="rgb(32, 139, 254)" %}  {% include button.html text="Linkedin" link="https://www.linkedin.com/company/hpai" color="#0a66c2" %}
 
 # Abstract
 
