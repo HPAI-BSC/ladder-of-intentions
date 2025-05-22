@@ -1,4 +1,7 @@
 # Ladder of Intentions
+
+The slides used to present this in EXTRAAMAS are in the file named Slides.
+
 ### Cite as
 ```
 @inproceedings{gimenez_ladder_2025,
